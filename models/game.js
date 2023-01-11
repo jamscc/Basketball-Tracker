@@ -12,8 +12,9 @@ Game.init(
       autoIncrement: true,
     },
     gameDate: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      type: DataTypes.STRING,
+      // type: DataTypes.DATE,
+      // defaultValue: DataTypes.NOW,
     },
     notes: {
       type: DataTypes.STRING,
@@ -22,19 +23,19 @@ Game.init(
       },
     },
     win: { 
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
     },
     score: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     asists: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
     },
     rebounds: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
     },
     points: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
     },
     user_id: {
       type: DataTypes.INTEGER,

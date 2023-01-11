@@ -1,0 +1,17 @@
+[
+    {
+        "username": "jakeClingonSmith",
+        "email":  "smith@email.com",
+        "password": "dreamBig"
+    },
+    {
+        "username": "TinySmiley",
+        "email":  "smiles@email.com",
+        "password": "running"
+    },
+    {
+        "username": "gussTower",
+        "email":  "migdal@email.com",
+        "password": "speeder"
+    }
+]

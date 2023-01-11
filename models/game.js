@@ -19,7 +19,7 @@ Game.init(
     notes: {
       type: DataTypes.STRING,
       validate: {
-        len: [500],
+        len: [0,500],
       },
     },
     win: { 

@@ -1,11 +1,11 @@
-const sequilize = require('../config/conection');
+const sequelize = require('../config/connection');
 const { Users, Games } = require('../models')
 
 const userSeedData = require('./userSeedData.json');
 const gameSeedData = require('./gameSeedData.json');
 
 const seedDataBase = async () => {
-    await sequilize.sync({ force: true });
+    await sequelize.sync({ force: true });
 
     const users = await Users.bulkCreate(userSeedData);
 

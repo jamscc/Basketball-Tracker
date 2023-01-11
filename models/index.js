@@ -1,11 +1,11 @@
-const Users = require('./user');
-const Games = require('./game');
+const Users = require('./users');
+const Games = require('./games');
 
 Users.hasMany(Games, {
     foreignKey: 'user_id',
 });
 
-Notes.belongsTo(Users, {
+Games.belongsTo(Users, {
     foreignKey: 'user_id',
 });
 

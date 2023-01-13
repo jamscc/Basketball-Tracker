@@ -1,4 +1,4 @@
-const { Game, User } = require('../models');
+const { Games, Users } = require('../../models');
 const router = require('express').Router();
 
 // login
@@ -6,7 +6,7 @@ router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
         
-        const userData = await User.findOne({ where: { username: username } });
+        const userData = await Users.findOne({ where: { username: username } });
 
         switch (!userData || !userData.passwordCompare(password)) {
             case (false):
@@ -26,16 +26,21 @@ router.post('/login', async (req, res) => {
 // signup
 router.post('/signup', async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, email, password } = req.body;
 
-        const fnd = await User.findOne({ where: { username: username.toLowerCase() } });
-        if (fnd) {
+        const fndUsername = await Users.findOne({ where: { username: username.toLowerCase() } });
+        if (fndUsername) {
             return res.status(400).json("username exists - Please submit another username.");
         }
 
-        await User.create({ username: username, password: password });
+        const fndEmail = await Users.findOne({ where: { email: email.toLowerCase() } });
+        if (fndEmail) {
+            return res.status(400).json("email exists - Please submit another email.");
+        }
 
-        const userData = User.findOne({ where: { username: username } });
+        await Users.create({ username: username, email: email, password: password });
+
+        const userData = await Users.findOne({ where: { username: username } });
 
         // session save
         return req.session.save(() => {
@@ -48,9 +53,9 @@ router.post('/signup', async (req, res) => {
 });
 
 // logout
-router.post('/logout', async (req, res) => {
+router.post('/logout', (req, res) => {
     try {
-        await req.session.destroy(() => {
+        req.session.destroy(() => {
             return res.end();
         });
     } catch (error) { return res.end(); }
@@ -60,11 +65,17 @@ router.post('/logout', async (req, res) => {
 // game create
 router.post('/newgame', async (req, res) => {
     try {
-        const { gameText } = req.body;
-
         const { user_id } = req.session;
 
-        const newGame = await Game.create({game_text: gameText, user_id: user_id})
+        const newGame = await Games.create({
+            gameDate: req.body.gameDate, 
+            notes: req.body.notes,
+            win: req.body.win,
+            score: req.body.score,
+            assists: req.body.assists,
+            rebounds: req.body.rebounds,
+            points: req.body.points, 
+            user_id: user_id})
         return res.json(newGame);
     } catch (error) { return res.status(400).json(error); }
 });

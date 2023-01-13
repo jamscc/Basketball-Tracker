@@ -1,22 +1,30 @@
 <div class="hero is-fullheight">
     <div class="hero-body is-justify-content-center is-align-items-center">
         <div class="columns is-flex is-flex-direction-column box">
+            <form id="login">
             <div class="column">
                 <label for="email">Username</label>
-                <input class="input is-primary" id="username-login" type="text" placeholder="Username">
+                <input class="input is-primary" id="username" type="text" placeholder="Username">
             </div>
             <div class="column">
                 <label for="Name">Password</label>
-                <input class="input is-primary" id="password-login" type="password" placeholder="Password">
+                <input class="input is-primary" id="password" type="password" placeholder="Password">
                 <a href="forget.html" class="is-size-7 has-text-primary">forget password?</a>
             </div>
             <div class="column">
-                <button class="button is-primary is-fullwidth login-act" type="submit">Login</button>
+                <button class="button is-primary is-fullwidth" id="login-act" type="submit">Login</button>
             </div>
+            <p id="feedback"></p>
             <div class="has-text-centered">
-                <p class="is-size-7"> Don't have an account? <a href="#" class="has-text-primary">Sign up</a>
+                <p  class="is-size-7"> Don't have an account? <a href"/signup" id="signupLink" class="has-text-primary">Sign up</a>
                 </p>
             </div>
+            </form>
         </div>
     </div>
 </div>
+
+
+
+
+<script src="./js/login.js"></script>

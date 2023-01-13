@@ -1,0 +1,96 @@
+<button id="logging-out">Logout</button>
+<p id="feedback"></p>
+
+<h1>Login</h1>
+<p>{{loggedIn}}</p>
+
+<h1>User</h1>
+<p>{{user.id}}</p>
+<p>{{user.username}}</p>
+<p>{{user.email}}</p>
+<p>{{user.total_points}}</p>
+<p>{{user.total_assists}}</p>
+<p>{{user.total_rebounds}}</p>
+<p>{{user.total_wins}}</p>
+<p>{{user.total_games}}</p>
+<p>{{user.avg_points_per_game}}</p>
+<p>{{user.avg_assists_per_game}}</p>
+<p>{{user.avg_rebounds_per_game}}</p>
+<p>{{user.win_percentage}}</p>
+
+
+<h1>All Games</h1>
+{{#each games}}
+<h4>Game</h4>
+<p>{{id}}</p>
+<p>{{gameDate}}</p>
+<p>{{notes}}</p>
+<p>{{win}}</p>
+<p>{{score}}</p>
+<p>{{assists}}</p>
+<p>{{rebounds}}</p>
+<p>{{points}}</p>
+<p>{{user_id}}</p>
+<p>{{createdAt}}</p>
+<p>{{updatedAt}}</p>
+
+<h4>User</h4>
+<p>{{user.id}}</p>
+<p>{{user.username}}</p>
+<p>{{user.email}}</p>
+{{/each}}
+
+<h1>Recent</h1>
+{{#each recent}}
+<h4>Game</h4>
+<p>{{id}}</p>
+<p>{{gameDate}}</p>
+<p>{{notes}}</p>
+<p>{{win}}</p>
+<p>{{score}}</p>
+<p>{{assists}}</p>
+<p>{{rebounds}}</p>
+<p>{{points}}</p>
+<p>{{user_id}}</p>
+<p>{{createdAt}}</p>
+<p>{{updatedAt}}</p>
+
+<h4>User</h4>
+<p>{{user.id}}</p>
+<p>{{user.username}}</p>
+<p>{{user.email}}</p>
+{{/each}}
+
+
+<h2>add a Game</h2>
+<form id="new-game">
+    <label for="game-date">gameDate</label>
+    <input type="text" id="game-date">
+
+    <label for="notes">notes</label>
+    <textarea id="notes"></textarea>
+
+    <label for="win">win</label>
+    <input type="checkbox" id="win">
+
+    <label for="score">score</label>
+    <input type="text" id="score">
+
+    <label for="assists">assists</label>
+    <input id="assists">
+
+    <label for="rebounds">rebounds</label>
+    <input id="rebounds">
+
+    <label for="points">points</label>
+    <input id="points">
+
+    <button>submit</button>
+</form>
+
+<p id="add-feedback"></p>
+
+
+
+<script src="./js/logout.js"></script>
+<script src="./js/addgame.js"></script>

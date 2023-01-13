@@ -7,13 +7,15 @@ const gameSeedData = require('./gameSeedData.json');
 const seedDataBase = async () => {
     await sequelize.sync({ force: true });
 
-    const users = await Users.bulkCreate(userSeedData);
+    const users = await Users.bulkCreate(userSeedData, {
+        individualHooks: true,
+    });
 
     for (const game of gameSeedData) {
         const newGame = await Games.create({
             ...game,
 
-            users_id: users[Math.floor(Math.random() * users.length)].id
+            user_id: users[Math.floor(Math.random() * users.length)].id
         });
     };
     process.exit(0);

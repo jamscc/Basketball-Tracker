@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
+const eHandlebars = require('express-handlebars');
 
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
@@ -10,6 +11,8 @@ const helpers = require('./utils/helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const handlebars = eHandlebars.create({ helpers });
 
 const sess = {
   secret: process.env.SECRET,
@@ -23,7 +26,7 @@ const sess = {
 
 app.use(session(sess));
 
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());

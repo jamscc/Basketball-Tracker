@@ -1,11 +1,11 @@
-const { Game, User } = require('../models');
+const { Games, Users } = require('../models');
 const router = require('express').Router();
 const authReq = require('../utils/auth');
 const sequelize = require('../config/connection');
 
-// homepage
+// login
 router.get('/', (req, res) => {
-    return res.render('homepage');
+    return res.render('login');
 });
 
 // login
@@ -34,31 +34,105 @@ router.get('/signup', (req, res) => {
 router.get('/dashboard', authReq, async (req, res) => {
     try {
         const { loggedIn, user_id } = req.session;
-        const userGames = await Game.findAll({ where: { user_id: user_id } })
 
+        const userData = await Users.findByPk(user_id, {
+            include: [
+                { model: Games }
+            ],
+            attributes: {
+                exclude: ['password'],
+                include: [
+                    [
+                        sequelize.literal(
+                            '(SELECT SUM(points) FROM game WHERE user_id = ' + user_id + ')'), 'total_points',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT SUM(assists) FROM game WHERE user_id = ' + user_id + ')'), 'total_assists',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT SUM(rebounds) FROM game WHERE user_id = ' + user_id + ')'), 'total_rebounds',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT COUNT(win) FROM game WHERE win = true AND user_id = ' + user_id + ')'), 'total_wins',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT COUNT(id) FROM game WHERE user_id = ' + user_id + ')'), 'total_games',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SUM(points)/COUNT(id)) FROM game WHERE user_id = ' + user_id + ')'), 'avg_points_per_game',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SUM(assists)/COUNT(id)) FROM game WHERE user_id = ' + user_id + ')'), 'avg_assists_per_game',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SUM(rebounds)/COUNT(id)) FROM game WHERE user_id = ' + user_id + ')'), 'avg_rebounds_per_game',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id) FROM game WHERE user_id = ' + user_id+ ')'), 'win_percentage',
+                    ]
+                ]
+            }
+        });
+
+        const user = userData.get({ plain: true });
+
+        const allGames = await Games.findAll({
+            where: { user_id: user_id },
+            include: [
+                { model: Users, attributes: { exclude: ['password'] } }
+            ]
+        });
+
+        let games = [];
         switch (true) {
-            case (!userGames):
+            case (!allGames):
                 return res.render('dashboard');
             default:
-                let games = [];
-                for (let i = 0; i < userGames.length; i++) {
-                    const eachGame = userGames[i];
+                for (let i = 0; i < allGames.length; i++) {
+                    const eachGame = allGames[i];
                     games.push(eachGame.get({ plain: true }));
                 }
-                return res.render('dashboard', { games, loggedIn: loggedIn });
         }
+
+        const recentEntries = await Games.findAll({
+            where: { user_id: user_id },
+            include: [
+                { model: Users, attributes: { exclude: ['password'] } }
+            ],
+            order: [
+                ['id', 'DESC']
+            ],
+            limit: 3
+        });
+
+        let recent = [];
+        for (let i = 0; i < recentEntries.length; i++) {
+            const game = recentEntries[i];
+            recent.push(game.get({ plain: true }));
+        }
+
+        return res.render('dashboard', { user, games, recent, loggedIn: loggedIn });
+
     } catch (error) {
         return res.status(500).json(error);
     }
 });
 
 // game by id
-router.get('/games/:id', authReq, (req, res) => {
+router.get('/games/:id', authReq, async (req, res) => {
     const { id } = req.params
     try {
-        const gameData = Game.findByPk(id, {
+        const gameData = await Games.findByPk(id, {
             include: [
-                { model: User, attributes: { exclude: ['password'] } }
+                { model: Users, attributes: { exclude: ['password'] } }
             ]
         });
 
@@ -67,7 +141,7 @@ router.get('/games/:id', authReq, (req, res) => {
         };
 
         const { loggedIn } = req.session;
-        const game = gameData.get({ plain: true })
+        const game = gameData.get({ plain: true });
 
         res.render('game', { game, loggedIn: loggedIn });
 

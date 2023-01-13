@@ -28,7 +28,7 @@ Game.init(
     score: {
       type: DataTypes.STRING,
     },
-    asists: {
+    assists: {
       type: DataTypes.INTEGER,
     },
     rebounds: {

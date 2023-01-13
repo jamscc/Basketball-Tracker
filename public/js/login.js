@@ -31,3 +31,7 @@ function login(event) {
 }
 
 document.querySelector('#login').addEventListener('submit', login);
+
+document.querySelector('.sign-in').addEventListener('click', function () {
+    return document.location.replace('/signup');
+});

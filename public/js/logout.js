@@ -1,4 +1,4 @@
-const feedback = document.querySelector('#feedback');
+// const feedback = document.querySelector('#feedback');
 
 function logout() {
     fetch('/api/users/logout', {
@@ -16,4 +16,13 @@ function logout() {
     })
 }
 
-document.querySelector('#logging-out').addEventListener('click', logout);
+if (document.querySelector('#logging-out')) {
+    document.querySelector('#logging-out').addEventListener('click', logout);
+} else {
+    document.querySelector('.sign-link').addEventListener('click', function () {
+        return document.location.replace('/signup');
+    });
+    document.querySelector('#log-link').addEventListener('click', function () {
+        return document.location.replace('/');
+    });
+};

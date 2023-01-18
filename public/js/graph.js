@@ -52,7 +52,8 @@ function createGraph(data){
                 ]
             },
             options: {
-                radius: 10,
+                radius: 7,
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true

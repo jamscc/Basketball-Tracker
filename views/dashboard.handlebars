@@ -102,8 +102,13 @@
         </div>
     </div>
 
-
-
+    <div class="columns is-cenetered">
+        <div class="column is-two-thirds is-offset-one-fifth">
+            <div class="box" style="height: 400px;">
+                <canvas id="myChart"></canvas>
+                </div>
+        </div>
+    </div>
 
     <div class="columns is-multiline">
         <div class="column">
@@ -263,10 +268,12 @@
 {{/each}} --}}
 
 
-
 <p id="add-feedback"></p>
 
 
-<script src="./js/dashboard.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="./js/graph.js"></script>
 <script src="./js/logout.js"></script>
 <script src="./js/addgame.js"></script>

@@ -16,13 +16,20 @@ function logout() {
     })
 }
 
+document.querySelector('.home-image').addEventListener('click', function () {
+    return document.location.replace('/');
+});
+
 if (document.querySelector('#logging-out')) {
     document.querySelector('#logging-out').addEventListener('click', logout);
+    document.querySelector('.dashboard-link').addEventListener('click', function () {
+        return document.location.replace('/dashboard');
+    });
 } else {
     document.querySelector('.sign-link').addEventListener('click', function () {
         return document.location.replace('/signup');
     });
     document.querySelector('#log-link').addEventListener('click', function () {
-        return document.location.replace('/');
+        return document.location.replace('/login');
     });
 };

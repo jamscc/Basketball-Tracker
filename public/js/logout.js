@@ -29,7 +29,7 @@ if (document.querySelector('#logging-out')) {
     document.querySelector('.sign-link').addEventListener('click', function () {
         return document.location.replace('/signup');
     });
-    document.querySelector('#log-link').addEventListener('click', function () {
+    document.querySelector('.log-link').addEventListener('click', function () {
         return document.location.replace('/login');
     });
 };

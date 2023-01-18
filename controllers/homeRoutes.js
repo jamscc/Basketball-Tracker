@@ -30,6 +30,30 @@ router.get('/signup', (req, res) => {
     }
 });
 
+// getGames
+router.get('/getGames', authReq, async (req, res) => {
+    const { user_id } = req.session;
+
+    const allGames = await Games.findAll({
+        where: { user_id: user_id },
+        include: [
+            { model: Users, attributes: { exclude: ['password'] } }
+        ]
+    });
+
+    let games = [];
+    switch (true) {
+        case (!allGames):
+            return res.render('dashboard');
+        default:
+            for (let i = 0; i < allGames.length; i++) {
+                const eachGame = allGames[i];
+                games.push(eachGame.get({ plain: true }));
+            }
+    }
+    res.json(games)
+})
+
 // dashboard
 router.get('/dashboard', authReq, async (req, res) => {
     try {
@@ -118,6 +142,7 @@ router.get('/dashboard', authReq, async (req, res) => {
             const game = recentEntries[i];
             recent.push(game.get({ plain: true }));
         }
+            console.log(games);
 
         return res.render('dashboard', { user, games, recent, loggedIn: loggedIn });
 

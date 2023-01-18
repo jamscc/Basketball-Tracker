@@ -102,21 +102,64 @@
         </div>
     </div>
 
+
+
+
     <div class="columns is-multiline">
         <div class="column">
             <div class="block">
                 <div class="level panel">
                     <p class="panel-heading level-item">Games Played</p>
                 </div>
+                <div class="columns is-multiline">
+    <div class="column">
+        <div class="block">
+            <form id="new-game" class="columns">
+                <div class="column is-1 is-offset-1">
+                    <label for="game-date">gameDate</label>
+                    <input type="text" id="game-date" class="input">
+                </div>
+
+                <div class="column is-1 level-center">
+                    <label for="win">win</label>
+                    </br>
+                    <input type="checkbox" id="win">
+                </div>
+                <div class="column is-1">
+                    <label for="score">score</label>
+                    <input type="text" id="score" class="input">
+                </div>
+                <div class="column is-1">
+                    <label for="assists">assists</label>
+                    <input id="assists" class="input">
+                </div>
+                <div class="column is-1">
+                    <label for="rebounds">rebounds</label>
+                    <input id="rebounds" class="input">
+                </div>
+                <div class="column is-1">
+                    <label for="points">points</label>
+                    <input id="points" class="input">
+                </div>
+                <div class="column is-3">
+                    <label for="notes">notes</label>
+                    <textarea id="notes" class="input"></textarea>
+                </div>
+                
+                <button class=" column is-1">Add Game</button>
+            </form>
+        </div>
+    </div>
+</div>
                 {{#each games}}
-                <div class="columns  is-gapless is-multiline game-link">
+                <div class="columns is-centered is-gapless is-multiline game-link">
                     <p id="game-id" hidden>{{id}}</p>
-                    <div class="column is-4 ">
+                    <div class="column is-9">
                         <div class="block">
 
                             {{#if win}}
                             <div class="level panel is-success">
-                                
+
                                 <p class="panel-heading level-item">{{gameDate}} </p>
                                 <p class="panel-heading level-item">Win</p>
                                 {{else}}
@@ -168,7 +211,7 @@
             </div>
         </div>
 </main>
-
+{{!--
 <h1>Login</h1>
 <p>{{loggedIn}}</p>
 
@@ -215,34 +258,9 @@
 <p>{{user.id}}</p>
 <p>{{user.username}}</p>
 <p>{{user.email}}</p>
-{{/each}}
+{{/each}} --}}
 
 
-<h2>add a Game</h2>
-<form id="new-game">
-    <label for="game-date">gameDate</label>
-    <input type="text" id="game-date">
-
-    <label for="notes">notes</label>
-    <textarea id="notes"></textarea>
-
-    <label for="win">win</label>
-    <input type="checkbox" id="win">
-
-    <label for="score">score</label>
-    <input type="text" id="score">
-
-    <label for="assists">assists</label>
-    <input id="assists">
-
-    <label for="rebounds">rebounds</label>
-    <input id="rebounds">
-
-    <label for="points">points</label>
-    <input id="points">
-
-    <button>submit</button>
-</form>
 
 <p id="add-feedback"></p>
 

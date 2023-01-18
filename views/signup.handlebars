@@ -1,29 +1,31 @@
-
-    <div class="hero is-fullheight">
-        <div class="hero-body is-justify-content-center is-align-items-center">
-            <div class="columns is-flex is-flex-direction-column box">
+<div class="hero is-fullheight">
+    <div class="hero-body is-justify-content-center is-align-items-center">
+        <div class="columns is-flex is-flex-direction-column box">
+            <form id="sign-up">
                 <div class="column">
                     <label for="email">Email</label>
-                    <input class="input is-primary" type="text" placeholder="Email address" id="email">
+                    <input class="input is-warning" type="text" placeholder="Email address" id="email">
                 </div>
                 <div class="column">
                     <label for="username">User Name</label>
-                    <input class="input is-primary" type="text" placeholder="User name" id="username">
+                    <input class="input is-warning" type="text" placeholder="User name" id="username">
                 </div>
                 <div class="column">
                     <label for="Name">Password</label>
-                    <input class="input is-primary" type="password" placeholder="Password" id="password">
+                    <input class="input is-warning" type="password" placeholder="Password" id="password">
                 </div>
                 <div class="column">
-                    <button class="button is-primary is-fullwidth" type="submit" id="sign-up">Submit</button>
+                    <button class="button is-warning is-fullwidth" type="submit" id="sign-up">Submit</button>
                 </div>
                 <div class="has-text-centered">
-                    <p class="is-size-7"> Already have an account? <a href="#" class="has-text-primary">Log in</a>
+                    <p class="is-size-7"> Already have an account? <a href="/login" class="has-text-link log-link">Log
+                            in</a>
                     </p>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="./js/signup.js"></script>
+<script src="./js/signup.js"></script>
 <script src="./js/logout.js"></script>

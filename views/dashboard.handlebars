@@ -61,6 +61,7 @@
 <p>{{user.email}}</p>
 {{/each}}
 
+<p>{{games.1.id}}</p>
 
 <h2>add a Game</h2>
 <form id="new-game">
@@ -91,6 +92,12 @@
 <p id="add-feedback"></p>
 
 
+<div class="chart-container">
+        <canvas style="height:80px; width:120px" id="myChart"></canvas>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="./js/graph.js"></script>
 <script src="./js/logout.js"></script>
 <script src="./js/addgame.js"></script>

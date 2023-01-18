@@ -3,6 +3,7 @@ const Games = require('./games');
 
 Users.hasMany(Games, {
     foreignKey: 'user_id',
+    onDelete: 'CASCADE',
 });
 
 Games.belongsTo(Users, {

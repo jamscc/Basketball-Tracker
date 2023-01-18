@@ -1,35 +1,234 @@
-<button id="logging-out">Logout</button>
 <p id="feedback"></p>
 
+
+
+
+<main class="column">
+    <div class="level button is-static is-large is-fullwidth">
+        <div class="level-left">
+            <div class="level-item">
+                <div class="title">{{user.username}}</div>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <button type="button" class="button is-small">
+                    {{user.email}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="block">
+                <div class="level panel">
+                    <p class="panel-heading level-item">Performance Statistics</p>
+                </div>
+
+
+                <div class="columns is-multiline">
+                    <div class="column">
+                        <div class="box">
+                            <div class="level">
+                                <div class="heading level-item">Win Rate</div>
+                                <div class="title level-item">{{user.win_percentage}}%</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Total Wins</div>
+                                        <div class="title is-5">{{user.total_wins}}</div>
+                                    </div>
+                                </div>
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Total Games</div>
+                                        <div class="title is-5">{{user.total_games}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="box">
+                            <div class="level">
+                                <div class="heading level-item">Total Points</div>
+                                <div class="title level-item">{{user.total_points}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Points Per Game</div>
+                                        <div class="title is-5">{{user.avg_points_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="box">
+                            <div class="level">
+                                <div class="heading level-item">Total Assits</div>
+                                <div class="title level-item">{{user.total_assists}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Assists Per Game</div>
+                                        <div class="title is-5">{{user.avg_assists_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="box">
+                            <div class="level">
+                                <div class="heading level-item">Total Rebounds</div>
+                                <div class="title level-item">{{user.total_rebounds}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Rebounds Per Game</div>
+                                        <div class="title is-5">{{user.avg_rebounds_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="block">
+                <div class="level panel">
+                    <p class="panel-heading level-item">Games Played</p>
+                </div>
+                <div class="columns is-multiline">
+    <div class="column">
+        <div class="block">
+            <form id="new-game" class="columns">
+                <div class="column is-1 is-offset-1">
+                    <label for="game-date">gameDate</label>
+                    <input type="text" id="game-date" class="input">
+                </div>
+
+                <div class="column is-1 level-center">
+                    <label for="win">win</label>
+                    </br>
+                    <input type="checkbox" id="win">
+                </div>
+                <div class="column is-1">
+                    <label for="score">score</label>
+                    <input type="text" id="score" class="input">
+                </div>
+                <div class="column is-1">
+                    <label for="assists">assists</label>
+                    <input id="assists" class="input">
+                </div>
+                <div class="column is-1">
+                    <label for="rebounds">rebounds</label>
+                    <input id="rebounds" class="input">
+                </div>
+                <div class="column is-1">
+                    <label for="points">points</label>
+                    <input id="points" class="input">
+                </div>
+                <div class="column is-3">
+                    <label for="notes">notes</label>
+                    <textarea id="notes" class="input"></textarea>
+                </div>
+                
+                <button class=" column is-1">Add Game</button>
+            </form>
+        </div>
+    </div>
+</div>
+                {{#each games}}
+                <div class="columns is-centered is-gapless is-multiline game-link">
+                    <p id="game-id" hidden>{{id}}</p>
+                    <div class="column is-9">
+                        <div class="block">
+
+                            {{#if win}}
+                            <div class="level panel is-success">
+
+                                <p class="panel-heading level-item">{{gameDate}} </p>
+                                <p class="panel-heading level-item">Win</p>
+                                {{else}}
+                                <div class="level panel is-danger">
+                                    <p class="panel-heading level-item">{{gameDate}} </p>
+                                    <p class="panel-heading level-item">Loss</p>
+                                    {{/if}}
+                                    <p class="panel-heading level-item">{{score}}</p>
+                                </div>
+                                <div class="box">
+                                    <div class="level">
+                                        <div class="level-item">
+                                            <div class="">
+                                                <div class="heading">Points</div>
+                                                <div class="title is-5">{{points}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="level-item">
+                                            <div class="">
+                                                <div class="heading">Assists</div>
+                                                <div class="title is-5">{{assists}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="level-item">
+                                            <div class="">
+                                                <div class="heading">Rebounds</div>
+                                                <div class="title is-5">{{rebounds}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box">
+                                        <p>{{notes}}</p>
+                                    </div>
+                                    {{#if updatedAt}}
+                                    <p class="heading">>Updated {{updatedAt}}</p>
+                                    {{else}}
+                                    <p class="heading">Added {{createdAt}}</p>
+                                    {{/if}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+
+                </div>
+            </div>
+        </div>
+</main>
+{{!--
 <h1>Login</h1>
 <p>{{loggedIn}}</p>
 
 <h1>User</h1>
 <p>{{user.id}}</p>
-<p>{{user.username}}</p>
-<p>{{user.email}}</p>
-<p>{{user.total_points}}</p>
-<p>{{user.total_assists}}</p>
-<p>{{user.total_rebounds}}</p>
-<p>{{user.total_wins}}</p>
-<p>{{user.total_games}}</p>
-<p>{{user.avg_points_per_game}}</p>
-<p>{{user.avg_assists_per_game}}</p>
-<p>{{user.avg_rebounds_per_game}}</p>
-<p>{{user.win_percentage}}</p>
-
 
 <h1>All Games</h1>
 {{#each games}}
 <h4>Game</h4>
 <p>{{id}}</p>
-<p>{{gameDate}}</p>
-<p>{{notes}}</p>
-<p>{{win}}</p>
-<p>{{score}}</p>
-<p>{{assists}}</p>
-<p>{{rebounds}}</p>
-<p>{{points}}</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
 <p>{{user_id}}</p>
 <p>{{createdAt}}</p>
 <p>{{updatedAt}}</p>
@@ -59,35 +258,10 @@
 <p>{{user.id}}</p>
 <p>{{user.username}}</p>
 <p>{{user.email}}</p>
-{{/each}}
+{{/each}} --}}
 
 <p>{{games.1.id}}</p>
 
-<h2>add a Game</h2>
-<form id="new-game">
-    <label for="game-date">gameDate</label>
-    <input type="text" id="game-date">
-
-    <label for="notes">notes</label>
-    <textarea id="notes"></textarea>
-
-    <label for="win">win</label>
-    <input type="checkbox" id="win">
-
-    <label for="score">score</label>
-    <input type="text" id="score">
-
-    <label for="assists">assists</label>
-    <input id="assists">
-
-    <label for="rebounds">rebounds</label>
-    <input id="rebounds">
-
-    <label for="points">points</label>
-    <input id="points">
-
-    <button>submit</button>
-</form>
 
 <p id="add-feedback"></p>
 

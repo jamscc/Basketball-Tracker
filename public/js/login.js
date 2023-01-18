@@ -1,9 +1,11 @@
-const passwordInput = document.querySelector('#password');
-const usernameInput = document.querySelector('#username');
+
+    const passwordInput = document.querySelector('#password');
+    const usernameInput = document.querySelector('#username');
 const feedback = document.querySelector('#feedback');
 
 function login(event) {
     event.preventDefault();
+
 
     const password = passwordInput.value;
     const username = usernameInput.value;
@@ -29,3 +31,7 @@ function login(event) {
 }
 
 document.querySelector('#login').addEventListener('submit', login);
+
+document.querySelector('.sign-in').addEventListener('click', function () {
+    return document.location.replace('/signup');
+});

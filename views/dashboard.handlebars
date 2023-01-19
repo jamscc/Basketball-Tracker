@@ -106,7 +106,7 @@
         <div class="column is-two-thirds is-offset-one-fifth">
             <div class="box" style="height: 400px;">
                 <canvas id="myChart"></canvas>
-                </div>
+            </div>
         </div>
     </div>
 
@@ -117,47 +117,47 @@
                     <p class="panel-heading level-item">Games Played</p>
                 </div>
                 <div class="columns is-multiline">
-    <div class="column">
-        <div class="block">
-            <form id="new-game" class="columns">
-                <div class="column is-1 is-offset-1">
-                    <label for="game-date">gameDate</label>
-                    <input type="text" id="game-date" class="input">
-                </div>
+                    <div class="column">
+                        <div class="block box">
+                            <form id="new-game" class="columns">
+                                <div class="column is-1 is-offset-1">
+                                    <label for="game-date">gameDate</label>
+                                    <input type="text" id="game-date" class="input">
+                                </div>
 
-                <div class="column is-1 level-center">
-                    <label for="win">win</label>
-                    </br>
-                    <input type="checkbox" id="win">
+                                <div class="column is-1 level-center">
+                                    <label for="win">win</label>
+                                    </br>
+                                    <input type="checkbox" id="win">
+                                </div>
+                                <div class="column is-1">
+                                    <label for="score">score</label>
+                                    <input type="text" id="score" class="input">
+                                </div>
+                                <div class="column is-1">
+                                    <label for="assists">assists</label>
+                                    <input id="assists" class="input">
+                                </div>
+                                <div class="column is-1">
+                                    <label for="rebounds">rebounds</label>
+                                    <input id="rebounds" class="input">
+                                </div>
+                                <div class="column is-1">
+                                    <label for="points">points</label>
+                                    <input id="points" class="input">
+                                </div>
+                                <div class="column is-3">
+                                    <label for="notes">notes</label>
+                                    <textarea id="notes" class="input"></textarea>
+                                </div>
+                                <div class="column is-1">
+                                    <label for="notes"> <br></label>
+                                    <button class=" button is-centered">Add Game</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="column is-1">
-                    <label for="score">score</label>
-                    <input type="text" id="score" class="input">
-                </div>
-                <div class="column is-1">
-                    <label for="assists">assists</label>
-                    <input id="assists" class="input">
-                </div>
-                <div class="column is-1">
-                    <label for="rebounds">rebounds</label>
-                    <input id="rebounds" class="input">
-                </div>
-                <div class="column is-1">
-                    <label for="points">points</label>
-                    <input id="points" class="input">
-                </div>
-                <div class="column is-3">
-                    <label for="notes">notes</label>
-                    <textarea id="notes" class="input"></textarea>
-                </div>
-                <div class="column is-1">
-                <label for="notes"> <br></label>
-                <button class=" button is-centered">Add Game</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
                 {{#each games}}
                 <div class="columns is-centered is-gapless is-multiline game-link">
                     <p id="game-id" hidden>{{id}}</p>

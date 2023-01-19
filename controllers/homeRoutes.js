@@ -100,7 +100,7 @@ router.get('/dashboard', authReq, async (req, res) => {
                     ],
                     [
                         sequelize.literal(
-                            '(SELECT (SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id) FROM game WHERE user_id = ' + user_id+ ')'), 'win_percentage',
+                            '(SELECT ((SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id))*100 FROM game WHERE user_id = ' + user_id+ ')'), 'win_percentage',
                     ]
                 ]
             }

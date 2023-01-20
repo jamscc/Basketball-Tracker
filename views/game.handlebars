@@ -4,11 +4,11 @@
         <div class="block">
             <div class="level panel">
                 <p class='panel-heading level-item is-1'>Game ID:{{game.id}} on {{game.gameDate}}</p>
-                
-            </div>            
+
+            </div>
             {{#if game.win}}
             <div class="level panel is-success">
-<p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
+                <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
                 <p class="panel-heading level-item">Date: {{game.gameDate}} </p>
                 <p class="panel-heading level-item">Win</p>
                 {{else}}
@@ -58,6 +58,66 @@
                 </div>
 
             </div>
+            {{#if players}}
+            <div class="block">
+            <div class="level panel">
+                <p class='panel-heading level-item is-1'>Other players on {{game.gameDate}}</p>
+
+            </div>
+            {{#each players}}
+            {{#if win}}
+            <div class="level panel is-success">
+                <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
+                <p class="panel-heading level-item">Date: {{gameDate}} </p>
+                <p class="panel-heading level-item">Win</p>
+                {{else}}
+                <div class="level panel is-danger">
+                    <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
+                    <p class="panel-heading level-item">Date: {{gameDate}} </p>
+                    <p class="panel-heading level-item">Loss</p>
+                    {{/if}}
+                </div>
+                <div class="box">
+                    <div class="level">
+                        <div class="level-item">
+                            <div class="">
+                                <div class="heading">Score</div>
+                                <div class="title is-5">{{score}}</div>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div class="">
+                                <div class="heading">Points</div>
+                                <div class="title is-5">{{points}}</div>
+                            </div>
+                        </div>
+
+                        <div class="level-item">
+                            <div class="">
+                                <div class="heading">Assists</div>
+                                <div class="title is-5">{{assists}}</div>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div class="">
+                                <div class="heading">Rebounds</div>
+                                <div class="title is-5">{{rebounds}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Additional comments:</p>
+                    <div class="box">
+                        <p>{{notes}}</p>
+                    </div>
+                    {{#if updatedAt}}
+                    <p class="heading">>Updated {{updatedAt}}</p>
+                    {{else}}
+                    <p class="heading">Added {{createdAt}}</p>
+                    {{/if}}
+                </div>
+            {{/each}}
+            </div>
+            {{/if}}
         </div>
     </div>
     {{!-- <h4>User</h4>

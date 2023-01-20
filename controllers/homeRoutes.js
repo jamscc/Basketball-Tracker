@@ -100,7 +100,7 @@ router.get('/dashboard', authReq, async (req, res) => {
                     ],
                     [
                         sequelize.literal(
-                            '(SELECT (SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id) FROM game WHERE user_id = ' + user_id+ ')'), 'win_percentage',
+                            '(SELECT ((SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id))*100 FROM game WHERE user_id = ' + user_id+ ')'), 'win_percentage',
                     ]
                 ]
             }
@@ -151,6 +151,36 @@ router.get('/dashboard', authReq, async (req, res) => {
     }
 });
 
+router.get('/allgames', authReq, async (req, res) => {
+    try {
+        const { loggedIn, user_id } = req.session;
+
+        const allGames = await Games.findAll({
+            include: [
+                { model: Users, attributes: { exclude: ['password'] } }
+            ],
+            order: [
+                ['gameDate', 'DESC']
+            ]
+        });
+
+        let games = [];
+        switch (true) {
+            case (!allGames):
+                return res.render('dashboard');
+            default:
+                for (let i = 0; i < allGames.length; i++) {
+                    const eachGame = allGames[i];
+                    games.push(eachGame.get({ plain: true }));
+                }
+        }
+
+        return res.render('allgames', { games, loggedIn: loggedIn });
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+});
 // game by id
 router.get('/games/:id', authReq, async (req, res) => {
     const { id } = req.params
@@ -167,8 +197,25 @@ router.get('/games/:id', authReq, async (req, res) => {
 
         const { loggedIn } = req.session;
         const game = gameData.get({ plain: true });
-
-        res.render('game', { game, loggedIn: loggedIn });
+        const { gameDate } = gameData
+        console.log(gameDate);
+        const gamePlayers = await Games.findAll({
+            where: { gameDate: gameDate },
+            include: [
+                { model: Users, attributes: { exclude: ['password'] } }
+            ]
+        });
+        
+        let players = [];
+        for (let i = 0; i < gamePlayers.length; i++) {
+            const player = gamePlayers[i];
+            
+            if (player.id != game.id) {
+            players.push(player.get({ plain: true }));
+            }
+        }
+        
+        res.render('game', { game, players, loggedIn: loggedIn });
 
     } catch (error) {
         return res.status(500).json(error);

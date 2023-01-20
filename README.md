@@ -26,6 +26,8 @@ Repository: https://github.com/rak100/Performance-Tracker
 
 ## Screenshot
 
+![screenshot](assets/images/screenshot-basketball-tracker.png)
+
 ## License
 
 MIT License

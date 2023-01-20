@@ -1,34 +1,38 @@
 const ctx = document.getElementById('myChart');
+var htmlPoints = document.querySelectorAll('.gamePoints');
+var htmlAssists = document.querySelectorAll('.gameAssists');
+var htmlRebounds = document.querySelectorAll('.gameRebounds');
+var gameNumber = [];
+
 var gamePoints = [];
 var gameAssists = [];
 var gameRebounds = [];
-var gameNumber = [];
 
-function getData() {
-    fetch('/getGames', {
-        method: 'GET', 
-        headers: { 'Content-Type': 'application/json' },
-        }).then((response) => {
-            if(response.ok) {
-                response.json().then((data) => {
-                    createGraph(data);
-                });
-            };
-        });
-};
 
-function createGraph(data){
-    for (let i = 0; i < data.length; i++) {
-        var currentPoints = data[i].points;
-        var currentAssists = data[i].assists;
-        var currentRebounds = data[i].rebounds;
-        var currentGame = i + 1;
+
+// async function getData() {
+//     await fetch('/getGames', {
+//         method: 'GET', 
+//         headers: { 'Content-Type': 'application/json' },
+//         }).then((response) => {
+//             if(response.ok) {
+//                 response.json().then((data) => {
+//                     createGraph(data);
+//                 });
+//             };
+//         });
+// };
+
+function createGraph() {
+    for (let i = 0; i < htmlPoints.length; i++) {
+        var currentPoints = parseInt(htmlPoints[i].innerHTML);
+        var currentAssists = parseInt(htmlAssists[i].innerHTML);
+        var currentRebounds = parseInt(htmlRebounds[i].innerHTML);
         gamePoints.push(currentPoints);
         gameAssists.push(currentAssists);
         gameRebounds.push(currentRebounds);
-        gameNumber.push(currentGame); 
+        gameNumber.push(i + 1)
     };
-
     new Chart(
         ctx,
         {
@@ -69,4 +73,4 @@ function createGraph(data){
 };
 
 
-getData();
+createGraph();

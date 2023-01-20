@@ -3,9 +3,21 @@ const router = require('express').Router();
 const authReq = require('../utils/auth');
 const sequelize = require('../config/connection');
 
+//about
+router.get('/about', (req, res) => {
+    const { loggedIn } = req.session;
+
+    return res.render('about', {loggedIn: loggedIn});
+});
 // login
 router.get('/', (req, res) => {
-    return res.render('login');
+    const { loggedIn } = req.session;
+    switch (true) {
+        case (!loggedIn):
+            return res.render('login');
+        default:
+            return res.redirect('/dashboard');
+    }
 });
 
 // login
@@ -100,7 +112,7 @@ router.get('/dashboard', authReq, async (req, res) => {
                     ],
                     [
                         sequelize.literal(
-                            '(SELECT ((SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id))*100 FROM game WHERE user_id = ' + user_id+ ')'), 'win_percentage',
+                            '(SELECT ((SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id))*100 FROM game WHERE user_id = ' + user_id + ')'), 'win_percentage',
                     ]
                 ]
             }
@@ -142,7 +154,6 @@ router.get('/dashboard', authReq, async (req, res) => {
             const game = recentEntries[i];
             recent.push(game.get({ plain: true }));
         }
-            console.log(games);
 
         return res.render('dashboard', { user, games, recent, loggedIn: loggedIn });
 
@@ -151,6 +162,7 @@ router.get('/dashboard', authReq, async (req, res) => {
     }
 });
 
+// All games
 router.get('/allgames', authReq, async (req, res) => {
     try {
         const { loggedIn, user_id } = req.session;
@@ -181,7 +193,8 @@ router.get('/allgames', authReq, async (req, res) => {
         return res.status(500).json(error);
     }
 });
-// game by id
+
+// game by id && players that played that day
 router.get('/games/:id', authReq, async (req, res) => {
     const { id } = req.params
     try {
@@ -190,35 +203,126 @@ router.get('/games/:id', authReq, async (req, res) => {
                 { model: Users, attributes: { exclude: ['password'] } }
             ]
         });
-
         if (!gameData) {
             return res.redirect('/dashboard');
         };
 
-        const { loggedIn } = req.session;
+        const { loggedIn, user_id } = req.session;
         const game = gameData.get({ plain: true });
-        const { gameDate } = gameData
-        console.log(gameDate);
+        const { gameDate } = game;
         const gamePlayers = await Games.findAll({
             where: { gameDate: gameDate },
             include: [
                 { model: Users, attributes: { exclude: ['password'] } }
             ]
         });
-        
+
         let players = [];
         for (let i = 0; i < gamePlayers.length; i++) {
             const player = gamePlayers[i];
-            
+
             if (player.id != game.id) {
-            players.push(player.get({ plain: true }));
+                players.push(player.get({ plain: true }));
             }
         }
-        
-        res.render('game', { game, players, loggedIn: loggedIn });
+
+        res.render('game', { game, players, user_id, loggedIn: loggedIn });
 
     } catch (error) {
         return res.status(500).json(error);
+    }
+});
+
+router.get('/players/:id', authReq, async (req, res) => {
+    const user_id = req.params.id;
+    try {
+
+        const { loggedIn } = req.session;
+
+        const userData = await Users.findByPk(user_id, {
+            include: [
+                { model: Games }
+            ],
+            attributes: {
+                exclude: ['password'],
+                include: [
+                    [
+                        sequelize.literal(
+                            '(SELECT SUM(points) FROM game WHERE user_id = ' + user_id + ')'), 'total_points',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT SUM(assists) FROM game WHERE user_id = ' + user_id + ')'), 'total_assists',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT SUM(rebounds) FROM game WHERE user_id = ' + user_id + ')'), 'total_rebounds',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT COUNT(win) FROM game WHERE win = true AND user_id = ' + user_id + ')'), 'total_wins',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT COUNT(id) FROM game WHERE user_id = ' + user_id + ')'), 'total_games',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SUM(points)/COUNT(id)) FROM game WHERE user_id = ' + user_id + ')'), 'avg_points_per_game',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SUM(assists)/COUNT(id)) FROM game WHERE user_id = ' + user_id + ')'), 'avg_assists_per_game',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT (SUM(rebounds)/COUNT(id)) FROM game WHERE user_id = ' + user_id + ')'), 'avg_rebounds_per_game',
+                    ],
+                    [
+                        sequelize.literal(
+                            '(SELECT ((SELECT COUNT(win) from game WHERE win = true AND user_id = ' + user_id + ')/COUNT(id))*100 FROM game WHERE user_id = ' + user_id + ')'), 'win_percentage',
+                    ]
+                ]
+            }
+        });
+
+        const user = userData.get({ plain: true });
+
+        const allGames = await Games.findAll({
+            where: { user_id: user_id },
+            include: [
+                { model: Users, attributes: { exclude: ['password'] } }
+            ]
+        });
+
+        let games = [];
+        switch (true) {
+            case (!allGames):
+                return res.render('dashboard');
+            default:
+                for (let i = 0; i < allGames.length; i++) {
+                    const eachGame = allGames[i];
+                    games.push(eachGame.get({ plain: true }));
+                }
+        }
+
+        console.log("player route", user, games);
+
+        return res.render('player', { user, games, loggedIn: loggedIn });
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+});
+
+// Anyother routes to dashboard or logIn
+router.get('*', (req, res) => {
+    const { loggedIn } = req.session;
+    switch (true) {
+        case (!loggedIn):
+            return res.render('login');
+        default:
+            return res.redirect('/dashboard');
     }
 });
 

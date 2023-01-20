@@ -1,4 +1,5 @@
-<div class="columns  is-gapless is-multiline game-link">
+<div class="columns  is-gapless is-multiline">
+    <p class="loggedId" hidden>{{user_id}}</p>
     <div class="column is-12 ">
 
         <div class="block">
@@ -7,122 +8,130 @@
 
             </div>
             {{#if game.win}}
-            <div class="level panel is-success">
+            <div class="level panel is-success player-link">
+                <p class="" hidden>{{game.user.id}}</p>
                 <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
                 <p class="panel-heading level-item">Date: {{game.gameDate}} </p>
                 <p class="panel-heading level-item">Win</p>
-                {{else}}
-                <div class="level panel is-danger">
-                    <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
-                    <p class="panel-heading level-item">Date: {{game.gameDate}} </p>
-                    <p class="panel-heading level-item">Loss</p>
-                    {{/if}}
-                </div>
-                <div class="box">
-                    <div class="level">
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Score</div>
-                                <div class="title is-5">{{game.score}}</div>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Points</div>
-                                <div class="title is-5">{{game.points}}</div>
-                            </div>
-                        </div>
-
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Assists</div>
-                                <div class="title is-5">{{game.assists}}</div>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Rebounds</div>
-                                <div class="title is-5">{{game.rebounds}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Additional comments:</p>
-                    <div class="box">
-                        <p>{{game.notes}}</p>
-                    </div>
-                    {{#if game.updatedAt}}
-                    <p class="heading">>Updated {{game.updatedAt}}</p>
-                    {{else}}
-                    <p class="heading">Added {{game.createdAt}}</p>
-                    {{/if}}
-                </div>
+            </div>
+            {{else}}
+            <div class="level panel is-danger player-link">
+                <p class="" hidden>{{game.user.id}}</p>
+                <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
+                <p class="panel-heading level-item">Date: {{game.gameDate}} </p>
+                <p class="panel-heading level-item">Loss</p>
 
             </div>
-            {{#if players}}
-            <div class="block">
+            {{/if}}
+            <div class="box">
+                <div class="level">
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Score</div>
+                            <div class="title is-5">{{game.score}}</div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Points</div>
+                            <div class="title is-5">{{game.points}}</div>
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Assists</div>
+                            <div class="title is-5">{{game.assists}}</div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Rebounds</div>
+                            <div class="title is-5">{{game.rebounds}}</div>
+                        </div>
+                    </div>
+                </div>
+                <p>Additional comments:</p>
+                <div class="box">
+                    <p>{{game.notes}}</p>
+                </div>
+                {{#if game.updatedAt}}
+                <p class="heading">>Updated {{game.updatedAt}}</p>
+                {{else}}
+                <p class="heading">Added {{game.createdAt}}</p>
+                {{/if}}
+            </div>
+
+        </div>
+        {{#if players}}
+        <div class="block">
             <div class="level panel">
                 <p class='panel-heading level-item is-1'>Other players on {{game.gameDate}}</p>
 
             </div>
             {{#each players}}
             {{#if win}}
-            <div class="level panel is-success">
+            <div class="level panel is-success player-link">
+                <p class="" hidden>{{user.id}}</p>
                 <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
                 <p class="panel-heading level-item">Date: {{gameDate}} </p>
                 <p class="panel-heading level-item">Win</p>
-                {{else}}
-                <div class="level panel is-danger">
-                    <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
-                    <p class="panel-heading level-item">Date: {{gameDate}} </p>
-                    <p class="panel-heading level-item">Loss</p>
-                    {{/if}}
-                </div>
-                <div class="box">
-                    <div class="level">
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Score</div>
-                                <div class="title is-5">{{score}}</div>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Points</div>
-                                <div class="title is-5">{{points}}</div>
-                            </div>
-                        </div>
-
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Assists</div>
-                                <div class="title is-5">{{assists}}</div>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Rebounds</div>
-                                <div class="title is-5">{{rebounds}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Additional comments:</p>
-                    <div class="box">
-                        <p>{{notes}}</p>
-                    </div>
-                    {{#if updatedAt}}
-                    <p class="heading">>Updated {{updatedAt}}</p>
-                    {{else}}
-                    <p class="heading">Added {{createdAt}}</p>
-                    {{/if}}
-                </div>
-            {{/each}}
+            </div>
+            {{else}}
+            <div class="level panel is-danger player-link">
+                <p class="" hidden>{{user.id}}</p>
+                <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
+                <p class="panel-heading level-item">Date: {{gameDate}} </p>
+                <p class="panel-heading level-item">Loss</p>
             </div>
             {{/if}}
-        </div>
-    </div>
-    {{!-- <h4>User</h4>
-    <p>{{game.user.id}}</p>
-    <p>{{game.user.username}}</p>
-    <p>{{game.user.email}}</p> --}}
+            <div class="box">
+                <div class="level">
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Score</div>
+                            <div class="title is-5">{{score}}</div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Points</div>
+                            <div class="title is-5">{{points}}</div>
+                        </div>
+                    </div>
 
-    <script src="./../js/logout.js"></script>
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Assists</div>
+                            <div class="title is-5">{{assists}}</div>
+                        </div>
+                    </div>
+                    <div class="level-item">
+                        <div class="">
+                            <div class="heading">Rebounds</div>
+                            <div class="title is-5">{{rebounds}}</div>
+                        </div>
+                    </div>
+                </div>
+                <p>Additional comments:</p>
+                <div class="box">
+                    <p>{{notes}}</p>
+                </div>
+                {{#if updatedAt}}
+                <p class="heading">>Updated {{updatedAt}}</p>
+                {{else}}
+                <p class="heading">Added {{createdAt}}</p>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</div>
+{{!-- <h4>User</h4>
+<p>{{game.user.id}}</p>
+<p>{{game.user.username}}</p>
+<p>{{game.user.email}}</p> --}}
+
+<script src="./../js/logout.js"></script>
+<script src="./../js/game.js"></script>

@@ -17,7 +17,11 @@ function logout() {
 }
 
 document.querySelector('.home-image').addEventListener('click', function () {
-    return document.location.replace('/');
+    return document.location.replace('/dashboard');
+});
+
+document.querySelector('.about-link').addEventListener('click', function () {
+    return document.location.replace('/about');
 });
 
 if (document.querySelector('#logging-out')) {

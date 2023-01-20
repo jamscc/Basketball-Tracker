@@ -25,6 +25,9 @@ if (document.querySelector('#logging-out')) {
     document.querySelector('.dashboard-link').addEventListener('click', function () {
         return document.location.replace('/dashboard');
     });
+    document.querySelector('.games-link').addEventListener('click', function () {
+        return document.location.replace('/allgames');
+    });
 } else {
     document.querySelector('.sign-link').addEventListener('click', function () {
         return document.location.replace('/signup');

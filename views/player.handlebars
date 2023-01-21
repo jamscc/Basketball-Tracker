@@ -10,9 +10,6 @@
                 <div class="title">{{user.username}}</div>
             </div>
         </div>
-        <div class="level-center">
-        <button class="button level-item">Compare</button>
-        </div>
         <div class="level-right">
             <div class="level-item">
                 <button type="button" class="button is-small">
@@ -23,13 +20,17 @@
     </div>
     <div class="columns is-multiline">
         <div class="column">
+            <div class="level panel is-warning compare-link">
+                    <p id="game-id" hidden>{{user.id}}</p>
+                    <p class="panel-heading level-item">Side-by-side Comparison</p>
+                </div>
             <div class="block">
                 <div class="level panel">
                     <p class="panel-heading level-item">Performance Statistics</p>
                 </div>
 
 
-                <div class="columns is-multiline">
+                <div class="columns is-multiline ">
                     <div class="column">
                         <div class="box">
                             <div class="level">
@@ -132,7 +133,7 @@
                                 <p class="panel-heading level-item">{{gameDate}} </p>
                                 <p class="panel-heading level-item">Win</p>
                                 {{else}}
-                                <div class="level panel is-danger">
+                                <div class="level panel">
                                     <p class="panel-heading level-item">{{gameDate}} </p>
                                     <p class="panel-heading level-item">Loss</p>
                                     {{/if}}

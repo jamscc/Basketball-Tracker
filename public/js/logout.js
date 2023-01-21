@@ -15,6 +15,15 @@ function logout() {
         feedback.textContent = error
     })
 }
+if (document.querySelector('.navbar-burger')) {
+    document.querySelector('.navbar-burger').addEventListener('click', function () {
+        if (document.querySelector('#navbarBasicExample').className === "navbar-menu is-active") {
+            document.querySelector('#navbarBasicExample').className = "navbar-menu";
+        } else {
+            document.querySelector('#navbarBasicExample').className = "navbar-menu is-active";
+        }
+    });
+}
 
 document.querySelector('.home-image').addEventListener('click', function () {
     return document.location.replace('/dashboard');

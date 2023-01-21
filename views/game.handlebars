@@ -3,8 +3,8 @@
     <div class="column is-12 ">
 
         <div class="block">
-            <div class="level panel">
-                <p class='panel-heading level-item is-1'>Game ID:{{game.id}} on {{game.gameDate}}</p>
+            <div class="level panel is-warning">
+                <p class='panel-heading level-item  is-1'>Game ID:{{game.id}} on {{game.gameDate}}</p>
 
             </div>
             {{#if game.win}}
@@ -15,7 +15,7 @@
                 <p class="panel-heading level-item">Win</p>
             </div>
             {{else}}
-            <div class="level panel is-danger player-link">
+            <div class="level panel player-link">
                 <p class="" hidden>{{game.user.id}}</p>
                 <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
                 <p class="panel-heading level-item">Date: {{game.gameDate}} </p>

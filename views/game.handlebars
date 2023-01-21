@@ -10,14 +10,14 @@
             {{#if game.win}}
             <div class="level panel is-success player-link">
                 <p class="" hidden>{{game.user.id}}</p>
-                <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
+                <p class='button is-warning is-large level-item'>Statistics for {{game.user.username}}</p>
                 <p class="panel-heading level-item">Date: {{game.gameDate}} </p>
                 <p class="panel-heading level-item">Win</p>
             </div>
             {{else}}
             <div class="level panel player-link">
                 <p class="" hidden>{{game.user.id}}</p>
-                <p class='panel-heading level-item'>Statistics for {{game.user.username}}</p>
+                <p class='button is-warning is-large level-item'>Statistics for {{game.user.username}}</p>
                 <p class="panel-heading level-item">Date: {{game.gameDate}} </p>
                 <p class="panel-heading level-item">Loss</p>
 
@@ -73,14 +73,14 @@
             {{#if win}}
             <div class="level panel is-success player-link">
                 <p class="" hidden>{{user.id}}</p>
-                <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
+                <p class='button is-warning is-large level-item'>Statistics for {{user.username}}</p>
                 <p class="panel-heading level-item">Date: {{gameDate}} </p>
                 <p class="panel-heading level-item">Win</p>
             </div>
             {{else}}
             <div class="level panel is-danger player-link">
                 <p class="" hidden>{{user.id}}</p>
-                <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
+                <p class='button is-warning is-large level-item'>Statistics for {{user.username}}</p>
                 <p class="panel-heading level-item">Date: {{gameDate}} </p>
                 <p class="panel-heading level-item">Loss</p>
             </div>

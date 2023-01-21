@@ -167,15 +167,18 @@
                             {{#if win}}
                             <div class="level panel is-success">
 
-                                <p class="panel-heading level-item">{{gameDate}} </p>
+                                <p class="button is-warning is-large level-item">{{gameDate}} </p>
                                 <p class="panel-heading level-item">Win</p>
+                                <p class="panel-heading level-item">{{score}}</p>
+                                </div>
                                 {{else}}
                                 <div class="level panel">
-                                    <p class="panel-heading level-item">{{gameDate}} </p>
+                                    <p class="button is-warning is-large level-item">{{gameDate}} </p>
                                     <p class="panel-heading level-item">Loss</p>
-                                    {{/if}}
                                     <p class="panel-heading level-item">{{score}}</p>
                                 </div>
+                                    {{/if}}
+                                    
                                 <div class="box">
                                     <div class="level">
                                         <div class="level-item">

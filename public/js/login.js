@@ -1,6 +1,6 @@
 
-    const passwordInput = document.querySelector('#password');
-    const usernameInput = document.querySelector('#username');
+const passwordInput = document.querySelector('#password');
+const usernameInput = document.querySelector('#username');
 const feedback = document.querySelector('#feedback');
 
 function login(event) {

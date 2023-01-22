@@ -37,7 +37,7 @@ function createGraph() {
                     {
                         label: 'assests',
                         data: gameAssists,
-                        
+
                     }
                 ]
             },

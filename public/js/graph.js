@@ -8,9 +8,6 @@ var gamePoints = [];
 var gameAssists = [];
 var gameRebounds = [];
 
-
-
-
 function createGraph() {
     // Gets graph data from page
     //pushes information to new chart

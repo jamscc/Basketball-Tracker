@@ -1,55 +1,26 @@
+<div class="level button is-static is-large is-fullwidth">
+        <div class="level">
+            <div class="level-item">
+                <div class="title">All Games</div>
+            </div>
+        </div>
+        
+    </div>
 {{#each games}}
 <div class="columns is-centered is-gapless is-multiline game-link">
     <p id="game-id" hidden>{{id}}</p>
     <div class="column is-9">
-        <div class="block">
+        <div class="block box">
 
-            {{#if win}}
-            <div class="level panel is-success">
+            
+            <div class="columns">
 
-                <p class="panel-heading level-item">{{gameDate}} </p>
-                <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
-                <p class="panel-heading level-item">Win</p>
-                {{else}}
-                <div class="level panel is-danger">
-                    <p class="panel-heading level-item">{{gameDate}} </p>
-                    <p class='panel-heading level-item'>Statistics for {{user.username}}</p>
-                    <p class="panel-heading level-item">Loss</p>
-                    {{/if}}
+                <button class="button is-warning is-large column is-2">{{gameDate}} </button>
+                <p class='panel-heading column is-6 level-item'>Statistics Entry for {{user.username}}</p>
                     <p class="panel-heading level-item">{{score}}</p>
+                    <button class="button is-large column is-3 is-static">View Game</button>
                 </div>
-                <div class="box">
-                    <div class="level">
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Points</div>
-                                <div class="title is-5">{{points}}</div>
-                            </div>
-                        </div>
-
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Assists</div>
-                                <div class="title is-5">{{assists}}</div>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div class="">
-                                <div class="heading">Rebounds</div>
-                                <div class="title is-5">{{rebounds}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <p>{{notes}}</p>
-                    </div>
-                    {{#if updatedAt}}
-                    <p class="heading">>Updated {{updatedAt}}</p>
-                    {{else}}
-                    <p class="heading">Added {{createdAt}}</p>
-                    {{/if}}
-                </div>
-
+               
             </div>
         </div>
     </div>

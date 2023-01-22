@@ -1,0 +1,200 @@
+<p id="feedback"></p>
+
+
+
+
+<main class="column">
+    <div class="level button is-static is-large is-fullwidth">
+        <div class="level-left">
+            <div class="level-item">
+                <div class="title">{{user.username}} VS {{player.username}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="block">
+                <div class="level panel is-warning">
+                    <p class="panel-heading level-item">Performance Statistics Side-by-side Comparison</p>
+                </div>
+
+
+                <div class="columns is-multiline is-mobile">
+                    <div class="column">
+
+                        <div class="box">
+                            <div class="heading level">
+                                <p class="level-item">{{user.username}}</p>
+                            </div>
+
+                            <div class="level box">
+                                <div class="heading level-item"> Win Rate</div>
+                                <div class="title level-item">{{user.win_percentage}}%</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Total Wins</div>
+                                        <div class="title is-5">{{user.total_wins}}</div>
+                                    </div>
+                                </div>
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Total Games</div>
+                                        <div class="title is-5">{{user.total_games}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item">Total Points</div>
+                                <div class="title level-item">{{user.total_points}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Points Per Game</div>
+                                        <div class="title is-5">{{user.avg_points_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item">Total Assists</div>
+                                <div class="title level-item">{{user.total_assists}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Assists Per Game</div>
+                                        <div class="title is-5">{{user.avg_assists_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item">Total Rebounds</div>
+                                <div class="title level-item">{{user.total_rebounds}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Rebounds Per Game</div>
+                                        <div class="title is-5">{{user.avg_rebounds_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="column">
+                        <div class="box">
+                            <div class="heading level">
+                                <p class="level-item">{{player.username}}</p>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item"> Win Rate</div>
+                                <div class="title level-item">{{player.win_percentage}}%</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Total Wins</div>
+                                        <div class="title is-5">{{player.total_wins}}</div>
+                                    </div>
+                                </div>
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Total Games</div>
+                                        <div class="title is-5">{{player.total_games}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item">Total Points</div>
+                                <div class="title level-item">{{player.total_points}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Points Per Game</div>
+                                        <div class="title is-5">{{player.avg_points_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item">Total Assists</div>
+                                <div class="title level-item">{{player.total_assists}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Assists Per Game</div>
+                                        <div class="title is-5">{{player.avg_assists_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level box">
+                                <div class="heading level-item">Total Rebounds</div>
+                                <div class="title level-item">{{player.total_rebounds}}</div>
+                            </div>
+                            <div class="level">
+                                <div class="level-item">
+                                    <div class="">
+                                        <div class="heading">Avg Rebounds Per Game</div>
+                                        <div class="title is-5">{{player.avg_rebounds_per_game}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+
+
+        <div class="columns is-cenetered">
+            <div class="column is-6">
+                <div class="box" style="height: 400px;">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="box" style="height: 400px;">
+                    <canvas id="theirChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="block">
+                    {{#each userGames}}
+                    <p id="" hidden>{{id}}</p>
+                    <p class="" hidden>{{gameDate}} </p>
+                    <p class="" hidden>{{score}}</p>
+                    <p class="gamePoints" hidden>{{points}}</p>
+                    <p class="gameAssists" hidden>{{assists}}</p>
+                    <p class="gameRebounds" hidden>{{rebounds}}</p>
+                    <p hidden>{{notes}}</p>
+                    {{/each}}
+                    {{#each playerGames}}
+                    <p id="" hidden>{{id}}</p>
+                    <p class="" hidden>{{gameDate}} </p>
+                    <p class="" hidden>{{score}}</p>
+                    <p class="playergamePoints" hidden>{{points}}</p>
+                    <p class="playergameAssists" hidden>{{assists}}</p>
+                    <p class="playergameRebounds" hidden>{{rebounds}}</p>
+                    <p hidden>{{notes}}</p>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./../js/graph.js"></script>
+<script src="./../js/playergraph.js"></script>
+<script src="./../js/logout.js"></script>

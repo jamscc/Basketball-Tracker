@@ -1,7 +1,8 @@
-const ctx = document.getElementById('myChart');
-var htmlPoints = document.querySelectorAll('.gamePoints');
-var htmlAssists = document.querySelectorAll('.gameAssists');
-var htmlRebounds = document.querySelectorAll('.gameRebounds');
+// Copy of graph.js used to compare two users
+const ctx2 = document.getElementById('theirChart');
+var htmlPoints = document.querySelectorAll('.playergamePoints');
+var htmlAssists = document.querySelectorAll('.playergameAssists');
+var htmlRebounds = document.querySelectorAll('.playergameRebounds');
 var gameNumber = [];
 
 var gamePoints = [];
@@ -9,8 +10,6 @@ var gameAssists = [];
 var gameRebounds = [];
 
 function createGraph() {
-    // Gets graph data from page
-    //pushes information to new chart
     for (let i = 0; i < htmlPoints.length; i++) {
         var currentPoints = parseInt(htmlPoints[i].innerHTML);
         var currentAssists = parseInt(htmlAssists[i].innerHTML);
@@ -21,7 +20,7 @@ function createGraph() {
         gameNumber.push(i + 1)
     };
     new Chart(
-        ctx,
+        ctx2,
         {
             type: 'scatter',
             data: {

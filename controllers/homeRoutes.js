@@ -128,6 +128,9 @@ router.get('/dashboard', authReq, async (req, res) => {
             where: { user_id: user_id },
             include: [
                 { model: Users, attributes: { exclude: ['password'] } }
+            ],
+            order: [
+                ['gameDate', 'DESC']
             ]
         });
 
@@ -261,6 +264,9 @@ router.get('/players/:id', authReq, async (req, res) => {
             where: { user_id: user_id },
             include: [
                 { model: Users, attributes: { exclude: ['password'] } }
+            ],
+            order: [
+                ['gameDate', 'DESC']
             ]
         });
 

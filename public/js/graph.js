@@ -10,20 +10,10 @@ var gameRebounds = [];
 
 
 
-// async function getData() {
-//     await fetch('/getGames', {
-//         method: 'GET', 
-//         headers: { 'Content-Type': 'application/json' },
-//         }).then((response) => {
-//             if(response.ok) {
-//                 response.json().then((data) => {
-//                     createGraph(data);
-//                 });
-//             };
-//         });
-// };
 
 function createGraph() {
+    // Gets graph data from page
+    //pushes information to new chart
     for (let i = 0; i < htmlPoints.length; i++) {
         var currentPoints = parseInt(htmlPoints[i].innerHTML);
         var currentAssists = parseInt(htmlAssists[i].innerHTML);
@@ -51,7 +41,7 @@ function createGraph() {
                     {
                         label: 'assests',
                         data: gameAssists,
-                        
+
                     }
                 ]
             },

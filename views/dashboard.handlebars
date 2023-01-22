@@ -120,19 +120,31 @@
                     <div class="column">
                         <div class="block box">
                             <form id="new-game" class="columns">
-                                <div class="column is-1 is-offset-1">
+                                <div class="column is-2">
+                                    <label for="game-select">Select a Date</label>
+                                    <div class="select">
+                                        <select class="game-selection">
+                                            <option>New Game Entry</option>
+                                            {{#each recent}}
+                                            <option>{{this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="column is-1">
                                     <label for="game-date">gameDate</label>
                                     <input type="text" id="game-date" class="input">
                                 </div>
 
+                                
+                                <div class="column is-1">
+                                    <label for="score">score</label>
+                                    <input type="text" id="score" class="input">
+                                </div>
                                 <div class="column is-1 level-center">
                                     <label for="win">win</label>
                                     </br>
                                     <input type="checkbox" id="win">
-                                </div>
-                                <div class="column is-1">
-                                    <label for="score">score</label>
-                                    <input type="text" id="score" class="input">
                                 </div>
                                 <div class="column is-1">
                                     <label for="assists">assists</label>
@@ -155,6 +167,7 @@
                                     <button class=" button is-centered">Add Game</button>
                                 </div>
                             </form>
+                            <p id="addGameFeedback"></p>
                         </div>
                     </div>
                 </div>
@@ -167,114 +180,61 @@
                             {{#if win}}
                             <div class="level panel is-success">
 
-                                <p class="button is-warning is-large level-item">{{gameDate}} </p>
+                                <p class="button is-warning is-large level-item game-date-data">{{gameDate}}</p>
                                 <p class="panel-heading level-item">Win</p>
                                 <p class="panel-heading level-item">{{score}}</p>
+                            </div>
+                            {{else}}
+                            <div class="level panel">
+                                <p class="button is-warning is-large level-item game-date-data">{{gameDate}}</p>
+                                <p class="panel-heading level-item">Loss</p>
+                                <p class="panel-heading level-item">{{score}}</p>
+                            </div>
+                            {{/if}}
+
+                            <div class="box">
+                                <div class="level">
+                                    <div class="level-item">
+                                        <div class="">
+                                            <div class="heading">Points</div>
+                                            <div class="title is-5 gamePoints">{{points}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="level-item">
+                                        <div class="">
+                                            <div class="heading">Assists</div>
+                                            <div class="title is-5 gameAssists">{{assists}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="level-item">
+                                        <div class="">
+                                            <div class="heading">Rebounds</div>
+                                            <div class="title is-5 gameRebounds">{{rebounds}}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                {{else}}
-                                <div class="level panel">
-                                    <p class="button is-warning is-large level-item">{{gameDate}} </p>
-                                    <p class="panel-heading level-item">Loss</p>
-                                    <p class="panel-heading level-item">{{score}}</p>
-                                </div>
-                                    {{/if}}
-                                    
                                 <div class="box">
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="heading">Points</div>
-                                                <div class="title is-5 gamePoints">{{points}}</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="heading">Assists</div>
-                                                <div class="title is-5 gameAssists">{{assists}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="level-item">
-                                            <div class="">
-                                                <div class="heading">Rebounds</div>
-                                                <div class="title is-5 gameRebounds">{{rebounds}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="box">
-                                        <p>{{notes}}</p>
-                                    </div>
-                                    {{#if updatedAt}}
-                                    <p class="heading">>Updated {{updatedAt}}</p>
-                                    {{else}}
-                                    <p class="heading">Added {{createdAt}}</p>
-                                    {{/if}}
+                                    <p>{{notes}}</p>
                                 </div>
-
+                                {{#if updatedAt}}
+                                <p class="heading">>Updated {{updatedAt}}</p>
+                                {{else}}
+                                <p class="heading">Added {{createdAt}}</p>
+                                {{/if}}
                             </div>
                         </div>
                     </div>
-                    {{/each}}
-
-
                 </div>
+                {{/each}}
             </div>
         </div>
+    </div>
+    {{#each recent}}
+    <p id="game-game-id" hidden>{{this}}</p>
+    {{/each}}
 </main>
-{{!--
-<h1>Login</h1>
-<p>{{loggedIn}}</p>
-
-<h1>User</h1>
-<p>{{user.id}}</p>
-
-<h1>All Games</h1>
-{{#each games}}
-<h4>Game</h4>
-<p>{{id}}</p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p>{{user_id}}</p>
-<p>{{createdAt}}</p>
-<p>{{updatedAt}}</p>
-
-<h4>User</h4>
-<p>{{user.id}}</p>
-<p>{{user.username}}</p>
-<p>{{user.email}}</p>
-{{/each}}
-
-<h1>Recent</h1>
-{{#each recent}}
-<h4>Game</h4>
-<p>{{id}}</p>
-<p>{{gameDate}}</p>
-<p>{{notes}}</p>
-<p>{{win}}</p>
-<p>{{score}}</p>
-<p>{{assists}}</p>
-<p>{{rebounds}}</p>
-<p>{{points}}</p>
-<p>{{user_id}}</p>
-<p>{{createdAt}}</p>
-<p>{{updatedAt}}</p>
-
-<h4>User</h4>
-<p>{{user.id}}</p>
-<p>{{user.username}}</p>
-<p>{{user.email}}</p>
-{{/each}} --}}
-
-
 <p id="add-feedback"></p>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./js/dashboard.js"></script>
 <script src="./js/graph.js"></script>

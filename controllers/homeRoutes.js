@@ -7,7 +7,7 @@ const sequelize = require('../config/connection');
 router.get('/about', (req, res) => {
     const { loggedIn } = req.session;
 
-    return res.render('about', {loggedIn: loggedIn});
+    return res.render('about', { loggedIn: loggedIn });
 });
 // login
 router.get('/', (req, res) => {
@@ -143,22 +143,24 @@ router.get('/dashboard', authReq, async (req, res) => {
         }
 
         const recentEntries = await Games.findAll({
-            where: { user_id: user_id },
             include: [
                 { model: Users, attributes: { exclude: ['password'] } }
             ],
             order: [
-                ['id', 'DESC']
-            ],
-            limit: 3
+                ['gameDate', 'DESC']
+            ]
         });
 
         let recent = [];
         for (let i = 0; i < recentEntries.length; i++) {
             const game = recentEntries[i];
-            recent.push(game.get({ plain: true }));
+            const getgame = game.get({ plain: true });
+            const gameSelect = getgame.gameDate + " " + getgame.score;
+            
+            if (!recent.includes(gameSelect)) {
+                recent.push(gameSelect);
+            }
         }
-
         return res.render('dashboard', { user, games, recent, loggedIn: loggedIn });
 
     } catch (error) {
@@ -339,11 +341,11 @@ router.get('/compare/:id', authReq, async (req, res) => {
 
         let playerGames = [];
         switch (true) {
-            case (!allPlayerGames ):
+            case (!allPlayerGames):
                 return res.render('dashboard');
             default:
-                for (let i = 0; i < allPlayerGames .length; i++) {
-                    const eachGame = allPlayerGames [i];
+                for (let i = 0; i < allPlayerGames.length; i++) {
+                    const eachGame = allPlayerGames[i];
                     playerGames.push(eachGame.get({ plain: true }));
                 }
         }

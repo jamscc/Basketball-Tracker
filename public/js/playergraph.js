@@ -1,3 +1,4 @@
+// Copy of graph.js used to compare two users
 const ctx2 = document.getElementById('theirChart');
 var htmlPoints = document.querySelectorAll('.playergamePoints');
 var htmlAssists = document.querySelectorAll('.playergameAssists');
@@ -7,21 +8,6 @@ var gameNumber = [];
 var gamePoints = [];
 var gameAssists = [];
 var gameRebounds = [];
-
-
-
-// async function getData() {
-//     await fetch('/getGames', {
-//         method: 'GET', 
-//         headers: { 'Content-Type': 'application/json' },
-//         }).then((response) => {
-//             if(response.ok) {
-//                 response.json().then((data) => {
-//                     createGraph(data);
-//                 });
-//             };
-//         });
-// };
 
 function createGraph() {
     for (let i = 0; i < htmlPoints.length; i++) {

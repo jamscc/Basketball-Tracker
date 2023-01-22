@@ -1,4 +1,12 @@
 const addFeedback = document.querySelector('#add-feedback');
+const gamegameId = document.querySelectorAll('.game-game-id');
+const gameSelection = document.querySelector('.game-selection');
+const gameDateData = document.querySelectorAll('.game-date-data');
+const gameDates = [];
+// Gets list of gameDates to prevent entering statistics twice for the same game
+for (let i = 0; i < gameDateData.length; i++) {
+    gameDates.push(gameDateData[i].innerHTML);
+}
 
 function addGame(event) {
     event.preventDefault();
@@ -10,28 +18,50 @@ function addGame(event) {
     const assists = document.querySelector('#assists').value;
     const points = document.querySelector('#points').value;
     const rebounds = document.querySelector('#rebounds').value;
-
-    fetch('/api/users/newgame', {
-        method: 'POST',
-        body: JSON.stringify({
-            gameDate,
-            notes,
-            win,
-            score,
-            assists,
-            points,
-            rebounds
-        }),
-        headers: { 'Content-Type': 'application/json' },
-    })
-        .then((r) => {
-            if (r.ok) {
-                return document.location.replace('/dashboard');
-            } else {
-                return r.json().then((error) => addFeedback.textContent = error);
-            }
+    //Prevents double entries
+    if (!gameDates.includes(gameDate)) {
+        fetch('/api/users/newgame', {
+            method: 'POST',
+            body: JSON.stringify({
+                gameDate,
+                notes,
+                win,
+                score,
+                assists,
+                points,
+                rebounds
+            }),
+            headers: { 'Content-Type': 'application/json' },
         })
-        .catch((error) => { return addFeedback.textContent = error })
+            .then((r) => {
+                if (r.ok) {
+                    return document.location.replace('/dashboard');
+                } else {
+                    return r.json().then((error) => addFeedback.textContent = error);
+                }
+            })
+            .catch((error) => { return addFeedback.textContent = error })
+    } else {
+        document.querySelector('#notes').value = "Statistics already entered for that date!"
+    }
 }
 
 document.querySelector('#new-game').addEventListener('submit', addGame);
+
+// Sets both date and score of the entry to the game in the dropdown
+// Or sets them to ""
+gameSelection.addEventListener('change', function () {
+    if (gameSelection.value === "New Game Entry") {
+        document.querySelector('#game-date').value = "";
+        document.querySelector('#score').value = "";
+        document.querySelector('#game-date').disabled = false;
+        document.querySelector('#score').disabled = false;
+    } else {
+        const pastDate = gameSelection.value.split(" ");
+        document.querySelector('#game-date').value = pastDate[0];
+        document.querySelector('#score').value = pastDate[1];
+        document.querySelector('#game-date').disabled = true;
+        document.querySelector('#score').disabled = true;
+    }
+
+});

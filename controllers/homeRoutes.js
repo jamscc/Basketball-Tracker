@@ -66,6 +66,7 @@ router.get('/getGames', authReq, async (req, res) => {
     res.json(games)
 })
 
+// SqlLiterals called for dashboard, player, and compare handlebar files
 function sqlLiterals(user_id) {
     return [
         [
@@ -145,6 +146,7 @@ router.get('/dashboard', authReq, async (req, res) => {
                 }
         }
 
+        // Gets list of games for addGame date dropdown
         const recentEntries = await Games.findAll({
             include: [
                 { model: Users, attributes: { exclude: ['password'] } }
@@ -159,7 +161,7 @@ router.get('/dashboard', authReq, async (req, res) => {
             const game = recentEntries[i];
             const getgame = game.get({ plain: true });
             const gameSelect = getgame.gameDate + " " + getgame.score;
-            
+            //ignores multiple instances of the same game
             if (!recent.includes(gameSelect)) {
                 recent.push(gameSelect);
             }
@@ -242,6 +244,7 @@ router.get('/games/:id', authReq, async (req, res) => {
     }
 });
 
+// players : dashboard for other players
 router.get('/players/:id', authReq, async (req, res) => {
     const user_id = req.params.id;
     try {
@@ -290,6 +293,7 @@ router.get('/players/:id', authReq, async (req, res) => {
     }
 });
 
+// compare : user stats vs otherPlayer stats
 router.get('/compare/:id', authReq, async (req, res) => {
     const player_id = req.params.id;
     try {

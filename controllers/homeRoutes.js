@@ -142,7 +142,9 @@ router.get('/dashboard', authReq, async (req, res) => {
             default:
                 for (let i = 0; i < allGames.length; i++) {
                     const eachGame = allGames[i];
-                    games.push(eachGame.get({ plain: true }));
+                    if (eachGame.gameDate != 'undefined/undefined/undefinedundefined') {
+                        games.push(eachGame.get({ plain: true }));
+                    }
                 }
         }
 
@@ -159,11 +161,13 @@ router.get('/dashboard', authReq, async (req, res) => {
         let recent = [];
         for (let i = 0; i < recentEntries.length; i++) {
             const game = recentEntries[i];
-            const getgame = game.get({ plain: true });
-            const gameSelect = getgame.gameDate + " " + getgame.score;
-            //ignores multiple instances of the same game
-            if (!recent.includes(gameSelect)) {
-                recent.push(gameSelect);
+            if (game.gameDate != 'undefined/undefined/undefinedundefined') {
+                const getgame = game.get({ plain: true });
+                const gameSelect = getgame.gameDate + " " + getgame.score;
+                //ignores multiple instances of the same game
+                if (!recent.includes(gameSelect)) {
+                    recent.push(gameSelect);
+                }
             }
         }
         return res.render('dashboard', { user, games, recent, loggedIn: loggedIn });
@@ -194,7 +198,9 @@ router.get('/allgames', authReq, async (req, res) => {
             default:
                 for (let i = 0; i < allGames.length; i++) {
                     const eachGame = allGames[i];
-                    games.push(eachGame.get({ plain: true }));
+                    if (eachGame.gameDate != 'undefined/undefined/undefinedundefined') {
+                        games.push(eachGame.get({ plain: true }));
+                    }
                 }
         }
 
@@ -231,8 +237,7 @@ router.get('/games/:id', authReq, async (req, res) => {
         let players = [];
         for (let i = 0; i < gamePlayers.length; i++) {
             const player = gamePlayers[i];
-
-            if (player.id != game.id) {
+            if (player.id != game.id || player.gameDate != 'undefined/undefined/undefinedundefined') {
                 players.push(player.get({ plain: true }));
             }
         }
@@ -280,7 +285,9 @@ router.get('/players/:id', authReq, async (req, res) => {
             default:
                 for (let i = 0; i < allGames.length; i++) {
                     const eachGame = allGames[i];
-                    games.push(eachGame.get({ plain: true }));
+                    if (eachGame.gameDate != 'undefined/undefined/undefinedundefined') {
+                        games.push(eachGame.get({ plain: true }));
+                    }
                 }
         }
 
@@ -326,7 +333,9 @@ router.get('/compare/:id', authReq, async (req, res) => {
             default:
                 for (let i = 0; i < allUserGames.length; i++) {
                     const eachGame = allUserGames[i];
-                    userGames.push(eachGame.get({ plain: true }));
+                    if (eachGame.gameDate != 'undefined/undefined/undefinedundefined') {
+                        userGames.push(eachGame.get({ plain: true }));
+                    }
                 }
         }
 
@@ -356,7 +365,9 @@ router.get('/compare/:id', authReq, async (req, res) => {
             default:
                 for (let i = 0; i < allPlayerGames.length; i++) {
                     const eachGame = allPlayerGames[i];
-                    playerGames.push(eachGame.get({ plain: true }));
+                    if (eachGame.gameDate != 'undefined/undefined/undefinedundefined') {
+                        playerGames.push(eachGame.get({ plain: true }));
+                    }
                 }
         }
 

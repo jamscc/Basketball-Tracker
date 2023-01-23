@@ -18,9 +18,10 @@ function addGame(event) {
     const assists = document.querySelector('#assists').value;
     const points = document.querySelector('#points').value;
     const rebounds = document.querySelector('#rebounds').value;
-    //Prevents double entries
+    //forces Date format from date-picker
     const gameYearDigits = gameDateFormat[0].split('');
-    const gameDate = gameDateFormat[1] + "/" + gameDateFormat[2] + "/" + gameYearDigits[2] + gameYearDigits[2];
+    const gameDate = gameDateFormat[1] + "/" + gameDateFormat[2] + "/" + gameYearDigits[2] + gameYearDigits[3];
+    //Prevents double entries:
     if (!gameDates.includes(gameDate)) {
         console.log(gameDate)
         fetch('/api/users/newgame', {
@@ -61,6 +62,7 @@ gameSelection.addEventListener('change', function () {
         document.querySelector('#score').disabled = false;
     } else {
         const pastDate = gameSelection.value.split(" ");
+        //forces dateFormat to date-picker format
         const gameDateFormat = pastDate[0].split('/')
         document.querySelector('#game-date').value = "20" + gameDateFormat[2] + "-" + gameDateFormat[0] + "-" + gameDateFormat[1];
         document.querySelector('#score').value = pastDate[1];

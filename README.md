@@ -13,7 +13,7 @@ Basketball Tracker is an application for anyone who enjoys playing the game of b
 
 ## Links
 
-Deployed Application: https://myscoretracker.herokuapp.com/
+Deployed Application: https://murmuring-badlands-82309.herokuapp.com/
 
 The application includes options to sign up, log in, and log out.
 
